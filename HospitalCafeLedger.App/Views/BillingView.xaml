@@ -1,0 +1,149 @@
+<UserControl x:Class="HospitalCafeLedger.App.Views.BillingView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="#F4F6FA">
+
+    <Grid>
+        <!-- Header -->
+        <Border Background="#032A63" Height="90" VerticalAlignment="Top">
+            <TextBlock Text="New Order / Billing"
+                       FontSize="30" FontWeight="Bold"
+                       Foreground="White" Margin="25" VerticalAlignment="Center"/>
+        </Border>
+
+        <Grid Margin="25,100,25,25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="260"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left: Doctor List -->
+            <Border Background="White" CornerRadius="10" Padding="15" Margin="0,0,10,0">
+                <StackPanel>
+                    <TextBlock Text="Select Doctor" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                    <TextBox Height="38" Padding="8" Text="Search doctor..." FontSize="13" Margin="0,0,0,10"/>
+                    <ListBox x:Name="DoctorListBox" Height="420" BorderThickness="0"
+                             SelectionChanged="DoctorListBox_SelectionChanged">
+                        <ListBoxItem Content="D001 - Dr. Ahmed Khan" IsSelected="True"/>
+                        <ListBoxItem Content="D002 - Dr. Ali Raza"/>
+                        <ListBoxItem Content="D003 - Dr. Usman"/>
+                        <ListBoxItem Content="D004 - Dr. Fatima Noor"/>
+                        <ListBoxItem Content="D005 - Dr. Saad"/>
+                        <ListBoxItem Content="D006 - Dr. Hamza"/>
+                        <ListBoxItem Content="D007 - Dr. Zainab"/>
+                    </ListBox>
+                </StackPanel>
+            </Border>
+
+            <!-- Center: Order Items -->
+            <Border Grid.Column="1" Background="White" CornerRadius="10" Padding="20" Margin="0,0,10,0">
+                <StackPanel>
+                    <Border Background="#F0F4FF" CornerRadius="8" Padding="15" Margin="0,0,0,15">
+                        <StackPanel>
+                            <TextBlock Text="Selected Doctor" FontSize="13" Foreground="Gray"/>
+                            <TextBlock x:Name="SelectedDoctorLabel" Text="Dr. Ahmed Khan (D001)"
+                                       FontSize="17" FontWeight="Bold"/>
+                            <TextBlock Text="Opening Balance: Rs. 2,400" Foreground="Red" FontSize="13"/>
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Text="Order Items" FontSize="15" FontWeight="Bold" Margin="0,0,0,8"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="80"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Background="#032A63" Padding="8">
+                            <TextBlock Text="Item" Foreground="White" FontWeight="Bold"/>
+                        </Border>
+                        <Border Grid.Column="1" Background="#032A63" Padding="8">
+                            <TextBlock Text="Qty" Foreground="White" FontWeight="Bold"/>
+                        </Border>
+                        <Border Grid.Column="2" Background="#032A63" Padding="8">
+                            <TextBlock Text="Price" Foreground="White" FontWeight="Bold"/>
+                        </Border>
+                        <Border Grid.Column="3" Background="#032A63" Padding="8">
+                            <TextBlock Text="Total" Foreground="White" FontWeight="Bold"/>
+                        </Border>
+                    </Grid>
+
+                    <ListBox x:Name="OrderItemsList" Height="200"
+                             BorderThickness="0,1,0,0" BorderBrush="#E0E0E0"/>
+
+                    <Border Background="#F8F8F8" Padding="10" Margin="0,10,0,0" CornerRadius="6">
+                        <Grid>
+                            <TextBlock Text="Total Amount:" FontSize="16" FontWeight="Bold"/>
+                            <TextBlock x:Name="TotalAmountLabel" Text="Rs. 0"
+                                       FontSize="18" FontWeight="Bold" Foreground="#0E4DB5"
+                                       HorizontalAlignment="Right"/>
+                        </Grid>
+                    </Border>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+                        <Button Content="Clear" Width="100" Height="40" Margin="0,0,10,0"
+                                Background="#E53E3E" Foreground="White" BorderThickness="0"
+                                FontWeight="Bold" Click="ClearOrderButton_Click"/>
+                        <Button Content="Save Order" Width="120" Height="40"
+                                Background="#22C55E" Foreground="White" BorderThickness="0"
+                                FontWeight="Bold" Click="SaveOrderButton_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Right: Quick Items -->
+            <Border Grid.Column="2" Background="White" CornerRadius="10" Padding="15">
+                <StackPanel>
+                    <TextBlock Text="Quick Items" FontSize="15" FontWeight="Bold" Margin="0,0,0,12"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                        </Grid.RowDefinitions>
+
+                        <Button Grid.Row="0" Grid.Column="0" Content="Tea&#10;Rs. 80"
+                                Margin="4" Background="#EFF6FF" BorderBrush="#BFDBFE"
+                                Click="QuickItem_Click" Tag="Tea|80"/>
+                        <Button Grid.Row="0" Grid.Column="1" Content="Coffee&#10;Rs. 120"
+                                Margin="4" Background="#EFF6FF" BorderBrush="#BFDBFE"
+                                Click="QuickItem_Click" Tag="Coffee|120"/>
+                        <Button Grid.Row="1" Grid.Column="0" Content="Burger&#10;Rs. 200"
+                                Margin="4" Background="#EFF6FF" BorderBrush="#BFDBFE"
+                                Click="QuickItem_Click" Tag="Burger|200"/>
+                        <Button Grid.Row="1" Grid.Column="1" Content="Sandwich&#10;Rs. 150"
+                                Margin="4" Background="#EFF6FF" BorderBrush="#BFDBFE"
+                                Click="QuickItem_Click" Tag="Sandwich|150"/>
+                        <Button Grid.Row="2" Grid.Column="0" Content="Juice&#10;Rs. 120"
+                                Margin="4" Background="#EFF6FF" BorderBrush="#BFDBFE"
+                                Click="QuickItem_Click" Tag="Juice|120"/>
+                        <Button Grid.Row="2" Grid.Column="1" Content="Lunch&#10;Rs. 250"
+                                Margin="4" Background="#EFF6FF" BorderBrush="#BFDBFE"
+                                Click="QuickItem_Click" Tag="Lunch|250"/>
+                        <Button Grid.Row="3" Grid.Column="0" Content="Paratha&#10;Rs. 50"
+                                Margin="4" Background="#EFF6FF" BorderBrush="#BFDBFE"
+                                Click="QuickItem_Click" Tag="Paratha|50"/>
+                        <Button Grid.Row="3" Grid.Column="1" Content="Omelette&#10;Rs. 80"
+                                Margin="4" Background="#EFF6FF" BorderBrush="#BFDBFE"
+                                Click="QuickItem_Click" Tag="Omelette|80"/>
+                        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                                Content="+ Custom Item"
+                                Margin="4" Background="#032A63" Foreground="White"
+                                BorderThickness="0" FontWeight="Bold"
+                                Click="CustomItemButton_Click"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

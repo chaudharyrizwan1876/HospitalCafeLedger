@@ -1,0 +1,11 @@
+D:\HospitalCafeLedger\HospitalCafeLedger.Models\bin\Debug\net10.0\HospitalCafeLedger.Models.deps.json
+D:\HospitalCafeLedger\HospitalCafeLedger.Models\bin\Debug\net10.0\HospitalCafeLedger.Models.dll
+D:\HospitalCafeLedger\HospitalCafeLedger.Models\bin\Debug\net10.0\HospitalCafeLedger.Models.pdb
+D:\HospitalCafeLedger\HospitalCafeLedger.Models\obj\Debug\net10.0\HospitalCafeLedger.Models.GeneratedMSBuildEditorConfig.editorconfig
+D:\HospitalCafeLedger\HospitalCafeLedger.Models\obj\Debug\net10.0\HospitalCafeLedger.Models.AssemblyInfoInputs.cache
+D:\HospitalCafeLedger\HospitalCafeLedger.Models\obj\Debug\net10.0\HospitalCafeLedger.Models.AssemblyInfo.cs
+D:\HospitalCafeLedger\HospitalCafeLedger.Models\obj\Debug\net10.0\HospitalCafeLedger.Models.csproj.CoreCompileInputs.cache
+D:\HospitalCafeLedger\HospitalCafeLedger.Models\obj\Debug\net10.0\HospitalCafeLedger.Models.dll
+D:\HospitalCafeLedger\HospitalCafeLedger.Models\obj\Debug\net10.0\refint\HospitalCafeLedger.Models.dll
+D:\HospitalCafeLedger\HospitalCafeLedger.Models\obj\Debug\net10.0\HospitalCafeLedger.Models.pdb
+D:\HospitalCafeLedger\HospitalCafeLedger.Models\obj\Debug\net10.0\ref\HospitalCafeLedger.Models.dll

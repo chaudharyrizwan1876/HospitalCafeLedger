@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="HospitalCafeLedger.App/HospitalCafeLedger.App.csproj" />
+  <Project Path="HospitalCafeLedger.Data/HospitalCafeLedger.Data.csproj" />
+  <Project Path="HospitalCafeLedger.Models/HospitalCafeLedger.Models.csproj" />
+  <Project Path="HospitalCafeLedger.Services/HospitalCafeLedger.Services.csproj" />
+</Solution>

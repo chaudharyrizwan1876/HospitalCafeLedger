@@ -1,0 +1,81 @@
+<UserControl x:Class="HospitalCafeLedger.App.Views.LedgerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="#F4F6FA">
+
+    <Grid>
+        <Border Background="#032A63" Height="90" VerticalAlignment="Top">
+            <TextBlock Text="Doctor Ledger / History" FontSize="30" FontWeight="Bold"
+                       Foreground="White" Margin="25" VerticalAlignment="Center"/>
+        </Border>
+
+        <Grid Margin="25,100,25,25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Doctor List -->
+            <Border Background="White" CornerRadius="10" Padding="15" Margin="0,0,10,0">
+                <StackPanel>
+                    <TextBlock Text="Select Doctor" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                    <TextBox Height="38" Padding="8" Text="Search doctor..." FontSize="13" Margin="0,0,0,10"/>
+                    <ListBox Height="450" BorderThickness="0">
+                        <ListBoxItem Content="D001 - Dr. Ahmed Khan" IsSelected="True"/>
+                        <ListBoxItem Content="D002 - Dr. Ali Raza"/>
+                        <ListBoxItem Content="D003 - Dr. Usman"/>
+                        <ListBoxItem Content="D004 - Dr. Fatima Noor"/>
+                        <ListBoxItem Content="D005 - Dr. Saad"/>
+                        <ListBoxItem Content="D006 - Dr. Hamza"/>
+                        <ListBoxItem Content="D007 - Dr. Zainab"/>
+                    </ListBox>
+                </StackPanel>
+            </Border>
+
+            <!-- Ledger Panel -->
+            <Border Grid.Column="1" Background="White" CornerRadius="10" Padding="25">
+                <StackPanel>
+                    <Grid Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="Doctor Info" FontSize="13" Foreground="Gray"/>
+                            <TextBlock Text="Dr. Ahmed Khan (D001)" FontSize="20" FontWeight="Bold"/>
+                            <TextBlock Text="Opening Balance: Rs. 2,400" Foreground="Red"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+                            <TextBlock Text="Total: Rs. 8,450" FontSize="14" HorizontalAlignment="Right"/>
+                            <TextBlock Text="Paid: Rs. 6,000" FontSize="14" HorizontalAlignment="Right"/>
+                            <TextBlock Text="Remaining: Rs. 2,450" FontSize="15" FontWeight="Bold" Foreground="Red" HorizontalAlignment="Right"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Ledger Table Header -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="90"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Background="#032A63" Padding="8"><TextBlock Text="Date" Foreground="White" FontWeight="Bold"/></Border>
+                        <Border Grid.Column="1" Background="#032A63" Padding="8"><TextBlock Text="Item" Foreground="White" FontWeight="Bold"/></Border>
+                        <Border Grid.Column="2" Background="#032A63" Padding="8"><TextBlock Text="Qty" Foreground="White" FontWeight="Bold"/></Border>
+                        <Border Grid.Column="3" Background="#032A63" Padding="8"><TextBlock Text="Price" Foreground="White" FontWeight="Bold"/></Border>
+                        <Border Grid.Column="4" Background="#032A63" Padding="8"><TextBlock Text="Total" Foreground="White" FontWeight="Bold"/></Border>
+                    </Grid>
+
+                    <ListBox Height="380" BorderThickness="0,1,0,0" BorderBrush="#E0E0E0">
+                        <ListBoxItem Content="24 May 2025    Tea           x2    80    160"/>
+                        <ListBoxItem Content="24 May 2025    Sandwich      x1    150   150    Total: Rs. 310"/>
+                        <ListBoxItem Content="25 May 2025    Coffee        x1    120   120"/>
+                        <ListBoxItem Content="25 May 2025    Burger        x1    200   200    Total: Rs. 320"/>
+                    </ListBox>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

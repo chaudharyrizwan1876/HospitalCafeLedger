@@ -1,0 +1,125 @@
+<UserControl x:Class="HospitalCafeLedger.App.Views.BackupView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="#F4F6FA">
+
+    <Grid>
+        <Border Background="#032A63" Height="90" VerticalAlignment="Top">
+            <TextBlock Text="Backup and Restore" FontSize="30" FontWeight="Bold"
+                       Foreground="White" Margin="25" VerticalAlignment="Center"/>
+        </Border>
+
+        <Grid Margin="25,100,25,25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="320"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Backup and Restore Section -->
+            <StackPanel Margin="0,0,15,0">
+                <Border Background="White" CornerRadius="10" Padding="25" Margin="0,0,0,15">
+                    <StackPanel>
+                        <TextBlock Text="Backup Database" FontSize="18" FontWeight="Bold" Margin="0,0,0,20"/>
+                        <TextBlock Text="Backup Location" FontSize="13" Margin="0,0,0,6"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                            <TextBox x:Name="BackupPathBox" Height="40" Width="350" Padding="10"
+                                     Text="D:\Cafe_Backup\" FontSize="13" BorderBrush="#CBD5E1"/>
+                            <Button Content="Browse" Width="80" Height="40" Margin="10,0,0,0"
+                                    Background="#E2E8F0" BorderBrush="#CBD5E1"/>
+                        </StackPanel>
+                        <Button Content="Create Backup" Width="160" Height="44"
+                                HorizontalAlignment="Left"
+                                Background="#22C55E" Foreground="White"
+                                BorderThickness="0" FontWeight="Bold" FontSize="15"
+                                Click="CreateBackup_Click"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="White" CornerRadius="10" Padding="25">
+                    <StackPanel>
+                        <TextBlock Text="Restore Database" FontSize="18" FontWeight="Bold" Margin="0,0,0,20"/>
+                        <TextBlock Text="Select Backup File" FontSize="13" Margin="0,0,0,6"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                            <TextBox x:Name="RestorePathBox" Height="40" Width="350" Padding="10"
+                                     FontSize="13" BorderBrush="#CBD5E1"/>
+                            <Button Content="Browse" Width="80" Height="40" Margin="10,0,0,0"
+                                    Background="#E2E8F0" BorderBrush="#CBD5E1"/>
+                        </StackPanel>
+                        <Button Content="Restore" Width="120" Height="44"
+                                HorizontalAlignment="Left"
+                                Background="#E53E3E" Foreground="White"
+                                BorderThickness="0" FontWeight="Bold" FontSize="15"
+                                Click="RestoreBackup_Click"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- Recent Backups -->
+            <Border Grid.Column="1" Background="White" CornerRadius="10" Padding="20">
+                <StackPanel>
+                    <TextBlock Text="Recent Backups" FontSize="16" FontWeight="Bold" Margin="0,0,0,15"/>
+
+                    <Border Padding="12" Background="#F0F9FF" CornerRadius="6" Margin="0,0,0,8">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="25 May 2025  10:00 AM" VerticalAlignment="Center"/>
+                            <Button Grid.Column="1" Content="Del" Width="36" Height="28"
+                                    Background="#FEE2E2" BorderThickness="0" FontSize="11"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Padding="12" Background="#F0F9FF" CornerRadius="6" Margin="0,0,0,8">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="24 May 2025  10:00 AM" VerticalAlignment="Center"/>
+                            <Button Grid.Column="1" Content="Del" Width="36" Height="28"
+                                    Background="#FEE2E2" BorderThickness="0" FontSize="11"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Padding="12" Background="#F0F9FF" CornerRadius="6" Margin="0,0,0,8">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="23 May 2025  10:00 AM" VerticalAlignment="Center"/>
+                            <Button Grid.Column="1" Content="Del" Width="36" Height="28"
+                                    Background="#FEE2E2" BorderThickness="0" FontSize="11"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Padding="12" Background="#F0F9FF" CornerRadius="6" Margin="0,0,0,8">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="22 May 2025  10:00 AM" VerticalAlignment="Center"/>
+                            <Button Grid.Column="1" Content="Del" Width="36" Height="28"
+                                    Background="#FEE2E2" BorderThickness="0" FontSize="11"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Padding="12" Background="#F0F9FF" CornerRadius="6">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="21 May 2025  10:00 AM" VerticalAlignment="Center"/>
+                            <Button Grid.Column="1" Content="Del" Width="36" Height="28"
+                                    Background="#FEE2E2" BorderThickness="0" FontSize="11"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
