@@ -3,78 +3,295 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Background="#F4F6FA">
 
+    <UserControl.Resources>
+        <Style x:Key="DoctorItem" TargetType="ListBoxItem">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Margin" Value="0,1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Bg" Background="Transparent" CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bg" Property="Background" Value="#EFF6FF"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Bg" Property="Background" Value="#0E4DB5"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
-        <Border Background="#032A63" Height="90" VerticalAlignment="Top">
-            <TextBlock Text="Doctor Ledger / History" FontSize="30" FontWeight="Bold"
-                       Foreground="White" Margin="25" VerticalAlignment="Center"/>
+        <!-- Header -->
+        <Border Background="#032A63" Height="110" VerticalAlignment="Top">
+            <Grid Margin="25">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Doctor Ledger / History" FontSize="28" FontWeight="Bold" Foreground="White"/>
+                    <TextBlock Text="View full order history and balance summary per doctor"
+                               FontSize="12" Foreground="#A0BFE0" Margin="0,2,0,0"/>
+                </StackPanel>
+            </Grid>
         </Border>
 
-        <Grid Margin="25,100,25,25">
+        <!-- 2-Column Layout -->
+        <Grid Margin="20,120,20,20">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="230"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Doctor List -->
-            <Border Background="White" CornerRadius="10" Padding="15" Margin="0,0,10,0">
-                <StackPanel>
-                    <TextBlock Text="Select Doctor" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
-                    <TextBox Height="38" Padding="8" Text="Search doctor..." FontSize="13" Margin="0,0,0,10"/>
-                    <ListBox Height="450" BorderThickness="0">
-                        <ListBoxItem Content="D001 - Dr. Ahmed Khan" IsSelected="True"/>
-                        <ListBoxItem Content="D002 - Dr. Ali Raza"/>
-                        <ListBoxItem Content="D003 - Dr. Usman"/>
-                        <ListBoxItem Content="D004 - Dr. Fatima Noor"/>
-                        <ListBoxItem Content="D005 - Dr. Saad"/>
-                        <ListBoxItem Content="D006 - Dr. Hamza"/>
-                        <ListBoxItem Content="D007 - Dr. Zainab"/>
-                    </ListBox>
-                </StackPanel>
+            <!-- LEFT: Doctor List -->
+            <Border Background="White" CornerRadius="12" Margin="0,0,12,0">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1" Color="#CBD5E1" Opacity="0.4"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Background="#032A63" CornerRadius="12,12,0,0" Padding="15,12">
+                        <TextBlock Text="Select Doctor" FontSize="14" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+
+                    <Border Grid.Row="1" Margin="10,10,10,5" BorderBrush="#E2E8F0"
+                            BorderThickness="1" CornerRadius="7">
+                        <Grid>
+                            <TextBlock Text="🔍" FontSize="13" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                            <TextBox x:Name="DoctorSearchBox" Height="34" FontSize="12"
+                                     BorderThickness="0" Background="Transparent"
+                                     VerticalContentAlignment="Center" Padding="26,0,6,0"
+                                     TextChanged="DoctorSearch_TextChanged"/>
+                            <TextBlock x:Name="DoctorSearchPlaceholder" Text="Search doctor..."
+                                       FontSize="12" Foreground="#94A3B8"
+                                       VerticalAlignment="Center" Margin="28,0,0,0"
+                                       IsHitTestVisible="False"/>
+                        </Grid>
+                    </Border>
+
+                    <ListBox x:Name="LedgerDoctorList" Grid.Row="2"
+                             BorderThickness="0" Background="Transparent"
+                             Padding="8,0,8,8"
+                             ItemContainerStyle="{StaticResource DoctorItem}"
+                             SelectionChanged="DoctorList_SelectionChanged"/>
+                </Grid>
             </Border>
 
-            <!-- Ledger Panel -->
-            <Border Grid.Column="1" Background="White" CornerRadius="10" Padding="25">
-                <StackPanel>
-                    <Grid Margin="0,0,0,20">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+            <!-- RIGHT: Ledger Panel -->
+            <Border Grid.Column="1" Background="White" CornerRadius="12">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1" Color="#CBD5E1" Opacity="0.4"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Doctor Info + Summary -->
+                    <Border Background="#F0F6FF" CornerRadius="12,12,0,0" Padding="20,16">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Left: doctor name -->
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="Doctor Info" FontSize="11"
+                                           Foreground="#64748B" FontWeight="SemiBold"/>
+                                <TextBlock x:Name="LedgerDoctorLabel" Text="— Select a doctor —"
+                                           FontSize="18" FontWeight="Bold" Foreground="#1E293B"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+                                    <TextBlock Text="Opening Balance: " FontSize="12" Foreground="#64748B"/>
+                                    <TextBlock x:Name="LedgerOpeningLabel" Text="Rs. 0"
+                                               FontSize="12" FontWeight="Bold" Foreground="#0E4DB5"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <!-- Right: totals -->
+                            <Border Grid.Column="1" CornerRadius="10" Padding="14,10" MinWidth="230">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Background" Value="#F0FFF4"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsInDebt, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True">
+                                                <Setter Property="Background" Value="#FEF2F2"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <StackPanel>
+                                    <Grid Margin="0,0,0,4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Total Deposited" FontSize="12" Foreground="#374151"/>
+                                        <TextBlock x:Name="LedgerTotalDepositLabel" Grid.Column="1"
+                                                   Text="Rs. 0" FontSize="12" FontWeight="SemiBold"
+                                                   Foreground="#374151" Margin="14,0,0,0"/>
+                                    </Grid>
+                                    <Grid Margin="0,0,0,4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Total Orders" FontSize="12" Foreground="#D97706"/>
+                                        <TextBlock x:Name="LedgerTotalOrdersLabel" Grid.Column="1"
+                                                   Text="Rs. 0" FontSize="12" FontWeight="SemiBold"
+                                                   Foreground="#D97706" Margin="14,0,0,0"/>
+                                    </Grid>
+                                    <Border Height="1" Background="#E2E8F0" Margin="0,3,0,5"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock x:Name="LedgerBalTitle" Text="Available Balance"
+                                                   FontSize="13" FontWeight="Bold" Foreground="#16A34A"/>
+                                        <TextBlock x:Name="LedgerBalanceLabel" Grid.Column="1"
+                                                   Text="Rs. 0" FontSize="15" FontWeight="Bold"
+                                                   Foreground="#16A34A" Margin="14,0,0,0"/>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <!-- Table Header -->
+                    <Border Grid.Row="1" Background="#032A63">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="55"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="90"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Date" Padding="14,11"
+                                       Foreground="White" FontWeight="Bold" FontSize="13"/>
+                            <TextBlock Grid.Column="1" Text="Item"
+                                       Padding="10,11" Foreground="White" FontWeight="Bold" FontSize="13"/>
+                            <TextBlock Grid.Column="2" Text="Qty"
+                                       Padding="6,11" Foreground="White" FontWeight="Bold" FontSize="13" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="3" Text="Price"
+                                       Padding="6,11" Foreground="White" FontWeight="Bold" FontSize="13" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="4" Text="Total"
+                                       Padding="6,11" Foreground="White" FontWeight="Bold" FontSize="13" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Ledger Rows -->
+                    <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
                         <StackPanel>
-                            <TextBlock Text="Doctor Info" FontSize="13" Foreground="Gray"/>
-                            <TextBlock Text="Dr. Ahmed Khan (D001)" FontSize="20" FontWeight="Bold"/>
-                            <TextBlock Text="Opening Balance: Rs. 2,400" Foreground="Red"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="1" HorizontalAlignment="Right">
-                            <TextBlock Text="Total: Rs. 8,450" FontSize="14" HorizontalAlignment="Right"/>
-                            <TextBlock Text="Paid: Rs. 6,000" FontSize="14" HorizontalAlignment="Right"/>
-                            <TextBlock Text="Remaining: Rs. 2,450" FontSize="15" FontWeight="Bold" Foreground="Red" HorizontalAlignment="Right"/>
-                        </StackPanel>
-                    </Grid>
+                            <ItemsControl x:Name="LedgerRows">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <!-- Date Group Header -->
+                                            <Border Background="#F8FAFC" Padding="14,8"
+                                                    BorderBrush="#E2E8F0" BorderThickness="0,0,0,1">
+                                                <TextBlock Text="{Binding DateHeader}"
+                                                           FontSize="12" FontWeight="Bold"
+                                                           Foreground="#374151"/>
+                                            </Border>
 
-                    <!-- Ledger Table Header -->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="60"/>
-                            <ColumnDefinition Width="80"/>
-                            <ColumnDefinition Width="90"/>
-                        </Grid.ColumnDefinitions>
-                        <Border Background="#032A63" Padding="8"><TextBlock Text="Date" Foreground="White" FontWeight="Bold"/></Border>
-                        <Border Grid.Column="1" Background="#032A63" Padding="8"><TextBlock Text="Item" Foreground="White" FontWeight="Bold"/></Border>
-                        <Border Grid.Column="2" Background="#032A63" Padding="8"><TextBlock Text="Qty" Foreground="White" FontWeight="Bold"/></Border>
-                        <Border Grid.Column="3" Background="#032A63" Padding="8"><TextBlock Text="Price" Foreground="White" FontWeight="Bold"/></Border>
-                        <Border Grid.Column="4" Background="#032A63" Padding="8"><TextBlock Text="Total" Foreground="White" FontWeight="Bold"/></Border>
-                    </Grid>
+                                            <!-- Order rows for this day -->
+                                            <ItemsControl ItemsSource="{Binding Rows}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border BorderBrush="#F1F5F9" BorderThickness="0,0,0,1">
+                                                            <Border.Style>
+                                                                <Style TargetType="Border">
+                                                                    <Setter Property="Background" Value="Transparent"/>
+                                                                    <Style.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter Property="Background" Value="#F8FAFC"/>
+                                                                        </Trigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Border.Style>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="120"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="55"/>
+                                                                    <ColumnDefinition Width="80"/>
+                                                                    <ColumnDefinition Width="90"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="" Padding="14,10"
+                                                                           FontSize="12" Foreground="#94A3B8"/>
+                                                                <TextBlock Grid.Column="1" Text="{Binding ItemName}"
+                                                                           Padding="10,10" FontSize="13"
+                                                                           FontWeight="SemiBold" Foreground="#1E293B"/>
+                                                                <TextBlock Grid.Column="2" Text="{Binding Qty}"
+                                                                           Padding="6,10" FontSize="13"
+                                                                           Foreground="#475569" HorizontalAlignment="Center"/>
+                                                                <TextBlock Grid.Column="3" Text="{Binding PriceDisplay}"
+                                                                           Padding="6,10" FontSize="13"
+                                                                           Foreground="#475569" HorizontalAlignment="Center"/>
+                                                                <TextBlock Grid.Column="4" Text="{Binding TotalDisplay}"
+                                                                           Padding="6,10" FontSize="13"
+                                                                           FontWeight="Bold" Foreground="#059669" HorizontalAlignment="Center"/>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
 
-                    <ListBox Height="380" BorderThickness="0,1,0,0" BorderBrush="#E0E0E0">
-                        <ListBoxItem Content="24 May 2025    Tea           x2    80    160"/>
-                        <ListBoxItem Content="24 May 2025    Sandwich      x1    150   150    Total: Rs. 310"/>
-                        <ListBoxItem Content="25 May 2025    Coffee        x1    120   120"/>
-                        <ListBoxItem Content="25 May 2025    Burger        x1    200   200    Total: Rs. 320"/>
-                    </ListBox>
-                </StackPanel>
+                                            <!-- Day Total Row -->
+                                            <Border Background="#FFF9F0" Padding="0,8"
+                                                    BorderBrush="#FDE68A" BorderThickness="0,1,0,1">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="120"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="55"/>
+                                                        <ColumnDefinition Width="80"/>
+                                                        <ColumnDefinition Width="90"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="3" Text="Day Total:"
+                                                               FontSize="12" FontWeight="Bold"
+                                                               Foreground="#92400E" HorizontalAlignment="Right"
+                                                               Padding="0,0,6,0" VerticalAlignment="Center"/>
+                                                    <TextBlock Grid.Column="4" Text="{Binding DayTotalDisplay}"
+                                                               FontSize="13" FontWeight="Bold"
+                                                               Foreground="#D97706" HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"/>
+                                                </Grid>
+                                            </Border>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                            <!-- Empty State -->
+                            <Border x:Name="EmptyLedger" Padding="40" Visibility="Visible">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Text="📋" FontSize="40" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="No orders found" FontSize="15" FontWeight="Bold"
+                                               Foreground="#64748B" HorizontalAlignment="Center" Margin="0,8,0,4"/>
+                                    <TextBlock Text="Select a doctor to view their order history"
+                                               FontSize="12" Foreground="#94A3B8" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
             </Border>
         </Grid>
     </Grid>

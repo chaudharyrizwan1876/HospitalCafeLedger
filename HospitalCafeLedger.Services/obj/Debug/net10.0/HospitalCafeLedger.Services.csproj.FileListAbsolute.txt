@@ -15,3 +15,4 @@ D:\HospitalCafeLedger\HospitalCafeLedger.Services\obj\Debug\net10.0\HospitalCafe
 D:\HospitalCafeLedger\HospitalCafeLedger.Services\obj\Debug\net10.0\refint\HospitalCafeLedger.Services.dll
 D:\HospitalCafeLedger\HospitalCafeLedger.Services\obj\Debug\net10.0\HospitalCafeLedger.Services.pdb
 D:\HospitalCafeLedger\HospitalCafeLedger.Services\obj\Debug\net10.0\ref\HospitalCafeLedger.Services.dll
+D:\HospitalCafeLedger\HospitalCafeLedger.Services\obj\Debug\net10.0\HospitalCafeLedger.Services.sourcelink.json

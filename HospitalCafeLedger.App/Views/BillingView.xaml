@@ -3,146 +3,332 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Background="#F4F6FA">
 
+    <UserControl.Resources>
+        <!-- Quick Item Button Style -->
+        <Style x:Key="QuickBtn" TargetType="Button">
+            <Setter Property="Background" Value="#EFF6FF"/>
+            <Setter Property="BorderBrush" Value="#BFDBFE"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#1E3A5F"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#DBEAFE"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Action Button Style -->
+        <Style x:Key="ActionBtn" TargetType="Button">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="8"
+                                Padding="12,0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.88"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Doctor List Item Style -->
+        <Style x:Key="DoctorItem" TargetType="ListBoxItem">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Margin" Value="0,1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Bg" Background="Transparent" CornerRadius="6" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bg" Property="Background" Value="#EFF6FF"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Bg" Property="Background" Value="#0E4DB5"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
         <!-- Header -->
-        <Border Background="#032A63" Height="90" VerticalAlignment="Top">
-            <TextBlock Text="New Order / Billing"
-                       FontSize="30" FontWeight="Bold"
-                       Foreground="White" Margin="25" VerticalAlignment="Center"/>
+        <Border Background="#032A63" Height="110" VerticalAlignment="Top">
+            <Grid Margin="25">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Billing / New Order" FontSize="28" FontWeight="Bold" Foreground="White"/>
+                    <TextBlock x:Name="HeaderSubtitle" Text="Select a doctor and add items to create an order"
+                               FontSize="12" Foreground="#A0BFE0" Margin="0,2,0,0"/>
+                </StackPanel>
+            </Grid>
         </Border>
 
-        <Grid Margin="25,100,25,25">
+        <!-- Main 3-Column Layout -->
+        <Grid Margin="20,120,20,20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="220"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="260"/>
+                <ColumnDefinition Width="270"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Left: Doctor List -->
-            <Border Background="White" CornerRadius="10" Padding="15" Margin="0,0,10,0">
-                <StackPanel>
-                    <TextBlock Text="Select Doctor" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
-                    <TextBox Height="38" Padding="8" Text="Search doctor..." FontSize="13" Margin="0,0,0,10"/>
-                    <ListBox x:Name="DoctorListBox" Height="420" BorderThickness="0"
-                             SelectionChanged="DoctorListBox_SelectionChanged">
-                        <ListBoxItem Content="D001 - Dr. Ahmed Khan" IsSelected="True"/>
-                        <ListBoxItem Content="D002 - Dr. Ali Raza"/>
-                        <ListBoxItem Content="D003 - Dr. Usman"/>
-                        <ListBoxItem Content="D004 - Dr. Fatima Noor"/>
-                        <ListBoxItem Content="D005 - Dr. Saad"/>
-                        <ListBoxItem Content="D006 - Dr. Hamza"/>
-                        <ListBoxItem Content="D007 - Dr. Zainab"/>
-                    </ListBox>
-                </StackPanel>
-            </Border>
+            <!-- ===== LEFT: Doctor List ===== -->
+            <Border Background="White" CornerRadius="12" Margin="0,0,10,0">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1" Color="#CBD5E1" Opacity="0.4"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-            <!-- Center: Order Items -->
-            <Border Grid.Column="1" Background="White" CornerRadius="10" Padding="20" Margin="0,0,10,0">
-                <StackPanel>
-                    <Border Background="#F0F4FF" CornerRadius="8" Padding="15" Margin="0,0,0,15">
-                        <StackPanel>
-                            <TextBlock Text="Selected Doctor" FontSize="13" Foreground="Gray"/>
-                            <TextBlock x:Name="SelectedDoctorLabel" Text="Dr. Ahmed Khan (D001)"
-                                       FontSize="17" FontWeight="Bold"/>
-                            <TextBlock Text="Opening Balance: Rs. 2,400" Foreground="Red" FontSize="13"/>
-                        </StackPanel>
+                    <Border Background="#032A63" CornerRadius="12,12,0,0" Padding="15,12">
+                        <TextBlock Text="Select Doctor" FontSize="14" FontWeight="Bold" Foreground="White"/>
                     </Border>
 
-                    <TextBlock Text="Order Items" FontSize="15" FontWeight="Bold" Margin="0,0,0,8"/>
-
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="60"/>
-                            <ColumnDefinition Width="80"/>
-                            <ColumnDefinition Width="80"/>
-                        </Grid.ColumnDefinitions>
-                        <Border Background="#032A63" Padding="8">
-                            <TextBlock Text="Item" Foreground="White" FontWeight="Bold"/>
-                        </Border>
-                        <Border Grid.Column="1" Background="#032A63" Padding="8">
-                            <TextBlock Text="Qty" Foreground="White" FontWeight="Bold"/>
-                        </Border>
-                        <Border Grid.Column="2" Background="#032A63" Padding="8">
-                            <TextBlock Text="Price" Foreground="White" FontWeight="Bold"/>
-                        </Border>
-                        <Border Grid.Column="3" Background="#032A63" Padding="8">
-                            <TextBlock Text="Total" Foreground="White" FontWeight="Bold"/>
-                        </Border>
-                    </Grid>
-
-                    <ListBox x:Name="OrderItemsList" Height="200"
-                             BorderThickness="0,1,0,0" BorderBrush="#E0E0E0"/>
-
-                    <Border Background="#F8F8F8" Padding="10" Margin="0,10,0,0" CornerRadius="6">
+                    <!-- Search -->
+                    <Border Grid.Row="1" Margin="10,10,10,5" BorderBrush="#E2E8F0" BorderThickness="1" CornerRadius="7">
                         <Grid>
-                            <TextBlock Text="Total Amount:" FontSize="16" FontWeight="Bold"/>
-                            <TextBlock x:Name="TotalAmountLabel" Text="Rs. 0"
-                                       FontSize="18" FontWeight="Bold" Foreground="#0E4DB5"
-                                       HorizontalAlignment="Right"/>
+                            <TextBlock Text="🔍" FontSize="13" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                            <TextBox x:Name="DoctorSearchBox" Height="34" FontSize="12"
+                                     BorderThickness="0" Background="Transparent"
+                                     VerticalContentAlignment="Center" Padding="26,0,6,0"
+                                     TextChanged="DoctorSearch_TextChanged"/>
+                            <TextBlock x:Name="DoctorSearchPlaceholder" Text="Search doctor..."
+                                       FontSize="12" Foreground="#94A3B8"
+                                       VerticalAlignment="Center" Margin="28,0,0,0"
+                                       IsHitTestVisible="False"/>
                         </Grid>
                     </Border>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
-                        <Button Content="Clear" Width="100" Height="40" Margin="0,0,10,0"
-                                Background="#E53E3E" Foreground="White" BorderThickness="0"
-                                FontWeight="Bold" Click="ClearOrderButton_Click"/>
-                        <Button Content="Save Order" Width="120" Height="40"
-                                Background="#22C55E" Foreground="White" BorderThickness="0"
-                                FontWeight="Bold" Click="SaveOrderButton_Click"/>
-                    </StackPanel>
-                </StackPanel>
+                    <!-- Doctor ListBox -->
+                    <ListBox x:Name="DoctorListBox" Grid.Row="2"
+                             BorderThickness="0" Background="Transparent"
+                             Padding="8,0,8,8"
+                             ItemContainerStyle="{StaticResource DoctorItem}"
+                             SelectionChanged="DoctorListBox_SelectionChanged"/>
+                </Grid>
             </Border>
 
-            <!-- Right: Quick Items -->
-            <Border Grid.Column="2" Background="White" CornerRadius="10" Padding="15">
-                <StackPanel>
-                    <TextBlock Text="Quick Items" FontSize="15" FontWeight="Bold" Margin="0,0,0,12"/>
+            <!-- ===== CENTER: Order Panel ===== -->
+            <Border Grid.Column="1" Background="White" CornerRadius="12" Margin="0,0,10,0">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1" Color="#CBD5E1" Opacity="0.4"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                    <Grid>
+                    <!-- Selected Doctor Info -->
+                    <Border Grid.Row="0" Background="#F0F6FF" CornerRadius="12,12,0,0" Padding="18,14">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Selected Doctor" FontSize="11" Foreground="#64748B" FontWeight="SemiBold"/>
+                                <TextBlock x:Name="SelectedDoctorLabel" Text="— No doctor selected —"
+                                           FontSize="16" FontWeight="Bold" Foreground="#1E293B"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <TextBlock Text="Opening Balance" FontSize="11" Foreground="#64748B" HorizontalAlignment="Right"/>
+                                <TextBlock x:Name="OpeningBalanceLabel" Text="Rs. 0"
+                                           FontSize="15" FontWeight="Bold" Foreground="#DC2626" HorizontalAlignment="Right"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <!-- Table Header -->
+                    <Border Grid.Row="1" Background="#032A63" Margin="0">
+                        <Grid Margin="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="55"/>
+                                <ColumnDefinition Width="75"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Item" Padding="15,10" Foreground="White" FontWeight="Bold" FontSize="13"/>
+                            <TextBlock Grid.Column="1" Text="Qty" Padding="5,10" Foreground="White" FontWeight="Bold" FontSize="13" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" Text="Price" Padding="5,10" Foreground="White" FontWeight="Bold" FontSize="13" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="3" Text="Total" Padding="5,10" Foreground="White" FontWeight="Bold" FontSize="13" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="4" Text="" Padding="5,10" Foreground="White" FontWeight="Bold" FontSize="13"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Order Rows -->
+                    <ItemsControl x:Name="OrderItemsList" Grid.Row="3">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="#F1F5F9" BorderThickness="0,0,0,1">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#F8FAFC"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="55"/>
+                                            <ColumnDefinition Width="75"/>
+                                            <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition Width="40"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding ItemName}" Padding="15,10" FontSize="13" FontWeight="SemiBold" Foreground="#1E293B"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding Qty}" Padding="5,10" FontSize="13" Foreground="#475569" HorizontalAlignment="Center"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding PriceDisplay}" Padding="5,10" FontSize="13" Foreground="#475569" HorizontalAlignment="Center"/>
+                                        <TextBlock Grid.Column="3" Text="{Binding TotalDisplay}" Padding="5,10" FontSize="13" FontWeight="Bold" Foreground="#059669" HorizontalAlignment="Center"/>
+                                        <Button Grid.Column="4" Content="✕" Width="28" Height="28"
+                                                Background="Transparent" BorderThickness="0"
+                                                Foreground="#DC2626" FontSize="13" FontWeight="Bold"
+                                                Cursor="Hand" Tag="{Binding ItemName}"
+                                                Click="RemoveItem_Click" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- Empty cart state -->
+                    <Border x:Name="EmptyCartMsg" Grid.Row="3" Padding="20" Visibility="Visible">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="🛒" FontSize="36" HorizontalAlignment="Center"/>
+                            <TextBlock Text="No items added yet" FontSize="13" Foreground="#94A3B8"
+                                       HorizontalAlignment="Center" Margin="0,6,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Total -->
+                    <Border Grid.Row="4" Background="#F8FAFC" Padding="15,12" Margin="0,0,0,0">
+                        <Grid>
+                            <TextBlock Text="Total Amount:" FontSize="15" FontWeight="Bold" Foreground="#374151" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="TotalAmountLabel" Text="Rs. 0"
+                                       FontSize="20" FontWeight="Bold" Foreground="#0E4DB5"
+                                       HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Action Buttons -->
+                    <Grid Grid.Row="5" Margin="15,10,15,15">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="65"/>
-                            <RowDefinition Height="65"/>
-                            <RowDefinition Height="65"/>
-                            <RowDefinition Height="65"/>
-                            <RowDefinition Height="65"/>
-                        </Grid.RowDefinitions>
-
-                        <Button Grid.Row="0" Grid.Column="0" Content="Tea&#10;Rs. 80"
-                                Margin="4" Background="#EFF6FF" BorderBrush="#BFDBFE"
-                                Click="QuickItem_Click" Tag="Tea|80"/>
-                        <Button Grid.Row="0" Grid.Column="1" Content="Coffee&#10;Rs. 120"
-                                Margin="4" Background="#EFF6FF" BorderBrush="#BFDBFE"
-                                Click="QuickItem_Click" Tag="Coffee|120"/>
-                        <Button Grid.Row="1" Grid.Column="0" Content="Burger&#10;Rs. 200"
-                                Margin="4" Background="#EFF6FF" BorderBrush="#BFDBFE"
-                                Click="QuickItem_Click" Tag="Burger|200"/>
-                        <Button Grid.Row="1" Grid.Column="1" Content="Sandwich&#10;Rs. 150"
-                                Margin="4" Background="#EFF6FF" BorderBrush="#BFDBFE"
-                                Click="QuickItem_Click" Tag="Sandwich|150"/>
-                        <Button Grid.Row="2" Grid.Column="0" Content="Juice&#10;Rs. 120"
-                                Margin="4" Background="#EFF6FF" BorderBrush="#BFDBFE"
-                                Click="QuickItem_Click" Tag="Juice|120"/>
-                        <Button Grid.Row="2" Grid.Column="1" Content="Lunch&#10;Rs. 250"
-                                Margin="4" Background="#EFF6FF" BorderBrush="#BFDBFE"
-                                Click="QuickItem_Click" Tag="Lunch|250"/>
-                        <Button Grid.Row="3" Grid.Column="0" Content="Paratha&#10;Rs. 50"
-                                Margin="4" Background="#EFF6FF" BorderBrush="#BFDBFE"
-                                Click="QuickItem_Click" Tag="Paratha|50"/>
-                        <Button Grid.Row="3" Grid.Column="1" Content="Omelette&#10;Rs. 80"
-                                Margin="4" Background="#EFF6FF" BorderBrush="#BFDBFE"
-                                Click="QuickItem_Click" Tag="Omelette|80"/>
-                        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
-                                Content="+ Custom Item"
-                                Margin="4" Background="#032A63" Foreground="White"
-                                BorderThickness="0" FontWeight="Bold"
-                                Click="CustomItemButton_Click"/>
+                        <Button Content="🗑  Clear Order" Height="44" Margin="0,0,6,0"
+                                Background="#FEE2E2" Foreground="#DC2626"
+                                Style="{StaticResource ActionBtn}"
+                                Click="ClearOrderButton_Click"/>
+                        <Button Grid.Column="1" Content="✓  Save Order" Height="44"
+                                Background="#16A34A" Foreground="White"
+                                Style="{StaticResource ActionBtn}"
+                                Click="SaveOrderButton_Click"/>
                     </Grid>
-                </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- ===== RIGHT: Quick Items ===== -->
+            <Border Grid.Column="2" Background="White" CornerRadius="12">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1" Color="#CBD5E1" Opacity="0.4"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Background="#032A63" CornerRadius="12,12,0,0" Padding="15,12">
+                        <TextBlock Text="Quick Items" FontSize="14" FontWeight="Bold" Foreground="White"/>
+                    </Border>
+
+                    <!-- Dynamic Quick Items from DB -->
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="10">
+                        <ItemsControl x:Name="QuickItemsPanel">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Width="110" Height="60" Margin="4"
+                                            Style="{StaticResource QuickBtn}"
+                                            Tag="{Binding Tag}"
+                                            Click="QuickItem_Click">
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <TextBlock Text="{Binding Name}" FontSize="12" FontWeight="SemiBold" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
+                                            <TextBlock Text="{Binding PriceText}" FontSize="11" Foreground="#059669" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                    <!-- Custom Item Button -->
+                    <Button Grid.Row="2" Content="+ Custom Item" Height="44" Margin="10,0,10,10"
+                            Background="#032A63" Foreground="White"
+                            BorderThickness="0" FontWeight="Bold" FontSize="13"
+                            Cursor="Hand" Click="CustomItemButton_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#0E4DB5"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
             </Border>
         </Grid>
     </Grid>

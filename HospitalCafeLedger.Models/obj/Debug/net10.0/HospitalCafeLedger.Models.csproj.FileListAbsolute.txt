@@ -9,3 +9,4 @@ D:\HospitalCafeLedger\HospitalCafeLedger.Models\obj\Debug\net10.0\HospitalCafeLe
 D:\HospitalCafeLedger\HospitalCafeLedger.Models\obj\Debug\net10.0\refint\HospitalCafeLedger.Models.dll
 D:\HospitalCafeLedger\HospitalCafeLedger.Models\obj\Debug\net10.0\HospitalCafeLedger.Models.pdb
 D:\HospitalCafeLedger\HospitalCafeLedger.Models\obj\Debug\net10.0\ref\HospitalCafeLedger.Models.dll
+D:\HospitalCafeLedger\HospitalCafeLedger.Models\obj\Debug\net10.0\HospitalCafeLedger.Models.sourcelink.json

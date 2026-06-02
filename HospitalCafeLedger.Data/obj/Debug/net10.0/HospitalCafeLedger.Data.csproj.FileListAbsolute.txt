@@ -13,3 +13,4 @@ D:\HospitalCafeLedger\HospitalCafeLedger.Data\obj\Debug\net10.0\HospitalCafeLedg
 D:\HospitalCafeLedger\HospitalCafeLedger.Data\obj\Debug\net10.0\refint\HospitalCafeLedger.Data.dll
 D:\HospitalCafeLedger\HospitalCafeLedger.Data\obj\Debug\net10.0\HospitalCafeLedger.Data.pdb
 D:\HospitalCafeLedger\HospitalCafeLedger.Data\obj\Debug\net10.0\ref\HospitalCafeLedger.Data.dll
+D:\HospitalCafeLedger\HospitalCafeLedger.Data\obj\Debug\net10.0\HospitalCafeLedger.Data.sourcelink.json

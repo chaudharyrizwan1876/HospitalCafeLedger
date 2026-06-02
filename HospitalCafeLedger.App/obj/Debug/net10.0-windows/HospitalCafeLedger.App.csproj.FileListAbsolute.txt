@@ -94,3 +94,4 @@ D:\HospitalCafeLedger\HospitalCafeLedger.App\obj\Debug\net10.0-windows\HospitalC
 D:\HospitalCafeLedger\HospitalCafeLedger.App\obj\Debug\net10.0-windows\ref\HospitalCafeLedger.App.dll
 D:\HospitalCafeLedger\HospitalCafeLedger.App\obj\Debug\net10.0-windows\Views\EditItemDialog.baml
 D:\HospitalCafeLedger\HospitalCafeLedger.App\obj\Debug\net10.0-windows\Views\EditItemDialog.g.cs
+D:\HospitalCafeLedger\HospitalCafeLedger.App\obj\Debug\net10.0-windows\HospitalCafeLedger.App.sourcelink.json
