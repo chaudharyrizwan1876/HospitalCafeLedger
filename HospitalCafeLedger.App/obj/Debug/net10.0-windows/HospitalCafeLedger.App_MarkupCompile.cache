@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET10_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NET9_0_OR_GREATER;NET10_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 D:\HospitalCafeLedger\HospitalCafeLedger.App\App.xaml
-15-1910710678
+15-1635704903
 
-21-1328760993
-2272024057588
-MainWindow.xaml;Views\AddDoctorDialog.xaml;Views\AddItemDialog.xaml;Views\BackupView.xaml;Views\BillingView.xaml;Views\CustomItemDialog.xaml;Views\DashboardView.xaml;Views\DoctorsView.xaml;Views\EditDoctorDialog.xaml;Views\EditItemDialog.xaml;Views\ItemsView.xaml;Views\LedgerView.xaml;Views\PaymentsView.xaml;Views\ReportsView.xaml;Views\SettingsView.xaml;
+21-1449656514
+239-1545057327
+MainWindow.xaml;Views\AddDoctorDialog.xaml;Views\AddItemDialog.xaml;Views\BackupView.xaml;Views\BillingView.xaml;Views\CustomItemDialog.xaml;Views\DashboardView.xaml;Views\DoctorsView.xaml;Views\EditDoctorDialog.xaml;Views\EditItemDialog.xaml;Views\ItemsView.xaml;Views\LedgerView.xaml;Views\PaymentsView.xaml;Views\PredictionsView.xaml;Views\ReportsView.xaml;
 
 False
 
