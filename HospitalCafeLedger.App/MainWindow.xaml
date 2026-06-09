@@ -59,7 +59,34 @@
 
                 <TextBlock DockPanel.Dock="Bottom"
                            Text="2026 Cafe Management System"
-                           Foreground="#4A6FA5" Margin="20,12" FontSize="11"/>
+                           Foreground="#4A6FA5" Margin="20,8" FontSize="11"/>
+
+                <!-- Logout always visible at bottom -->
+                <Border DockPanel.Dock="Bottom" Padding="8,0,8,10">
+                    <Button x:Name="BtnLogout"
+                            Height="44" Cursor="Hand"
+                            BorderThickness="0"
+                            Click="Logout_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="Bg" Background="#3B1515" CornerRadius="8" Padding="16,0">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="🚪" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                        <TextBlock Text="Logout" FontSize="14" FontWeight="SemiBold"
+                                                   Foreground="#FCA5A5" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="Bg" Property="Background" Value="#5B1A1A"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Border>
+
+                <Border DockPanel.Dock="Bottom" Height="1" Background="#1A3A6B" Margin="8,4"/>
 
                 <StackPanel Margin="8,12,8,0">
                     <Button x:Name="BtnAI" Content="  🔮 AI Insights"
@@ -93,12 +120,6 @@
                     <Button x:Name="BtnBackup"   Content="  Backup / Restore"
                             Style="{StaticResource NavBtn}"
                             Click="Nav_Click" Tag="Backup"/>
-
-                    <Separator Background="#1A3A6B" Margin="8,12"/>
-
-                    <Button x:Name="BtnLogout" Content="  Logout"
-                            Style="{StaticResource NavBtn}"
-                            Click="Logout_Click"/>
                 </StackPanel>
             </DockPanel>
         </Border>

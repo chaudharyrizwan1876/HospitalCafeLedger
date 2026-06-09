@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace HospitalCafeLedger.App;
 
@@ -27,7 +28,13 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         _activeBtn = BtnDashboard;
-        Loaded += (s, e) => ShowSection("Dashboard");
+        Loaded += (s, e) =>
+        {
+            // Fade-in animation when MainWindow opens
+            var fade = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(500));
+            BeginAnimation(OpacityProperty, fade);
+            ShowSection("Dashboard");
+        };
     }
 
     private void Nav_Click(object sender, RoutedEventArgs e)
@@ -39,7 +46,6 @@ public partial class MainWindow : Window
             _activeBtn.Background = _normalColor;
             _activeBtn.Foreground = _normalFg;
         }
-
         btn.Background = _activeColor;
         btn.Foreground = _activeFg;
         _activeBtn = btn;
@@ -54,38 +60,49 @@ public partial class MainWindow : Window
         {
             UIElement view = tag switch
             {
-                "Dashboard" => _dashboard ??= new Views.DashboardView(),
-                "Doctors"   => _doctors   ??= new Views.DoctorsView(),
-                "Items"     => _items     ??= new Views.ItemsView(),
-                "Billing"   => _billing   ??= new Views.BillingView(),
-                "Payments"  => _payments  ??= new Views.PaymentsView(),
-                "Ledger"    => _ledger    ??= new Views.LedgerView(),
+                "Dashboard"   => _dashboard   ??= new Views.DashboardView(),
+                "Doctors"     => _doctors     ??= new Views.DoctorsView(),
+                "Items"       => _items       ??= new Views.ItemsView(),
+                "Billing"     => _billing     ??= new Views.BillingView(),
+                "Payments"    => _payments    ??= new Views.PaymentsView(),
+                "Ledger"      => _ledger      ??= new Views.LedgerView(),
                 "Reports"     => _reports     ??= new Views.ReportsView(),
                 "Predictions" => _predictions ??= new Views.PredictionsView(),
                 "Backup"      => _backup      ??= new Views.BackupView(),
-                _           => _dashboard ??= new Views.DashboardView(),
+                _             => _dashboard   ??= new Views.DashboardView(),
             };
             ContentArea.Children.Add(view);
         }
         catch (Exception ex)
         {
-            var msg = new TextBlock
+            ContentArea.Children.Add(new TextBlock
             {
-                Text         = $"Could not load '{tag}' view.\n\n{GetFullMessage(ex)}",
+                Text         = $"Could not load '{tag}' view.\n\n{ex.Message}",
                 Margin       = new Thickness(30),
                 FontSize     = 14,
                 Foreground   = Brushes.Red,
                 TextWrapping = TextWrapping.Wrap
-            };
-            ContentArea.Children.Add(msg);
+            });
         }
     }
 
     private void Logout_Click(object sender, RoutedEventArgs e)
     {
-        var r = MessageBox.Show("Are you sure you want to logout?",
-                    "Logout", MessageBoxButton.YesNo, MessageBoxImage.Question);
-        if (r == MessageBoxResult.Yes) Application.Current.Shutdown();
+        var result = MessageBox.Show(
+            "Are you sure you want to logout?",
+            "Logout", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+        if (result != MessageBoxResult.Yes) return;
+
+        // Fade out then show login
+        var fade = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(400));
+        fade.Completed += (s, _) =>
+        {
+            var login = new LoginWindow();
+            login.Show();
+            Close();
+        };
+        BeginAnimation(OpacityProperty, fade);
     }
 
     private static string GetFullMessage(Exception? ex)

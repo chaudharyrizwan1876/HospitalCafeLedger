@@ -85,7 +85,7 @@ public partial class DoctorsView : UserControl
                 Department = dlg.Department,
                 PhoneNumber = dlg.Phone,
                 OpeningBalance = dlg.OpeningBalance,
-                IsActive = dlg.IsActive
+                IsActive = dlg.DoctorIsActive
             });
             LoadDoctors();
             MessageBox.Show($"'{dlg.DoctorName}' updated successfully!", "Doctor Updated",

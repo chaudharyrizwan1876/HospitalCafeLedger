@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Threading;
 using HospitalCafeLedger.Data;
 
 namespace HospitalCafeLedger.App;
@@ -15,28 +14,30 @@ public partial class App : Application
         AppDomain.CurrentDomain.UnhandledException += (s, e) =>
         {
             var ex = e.ExceptionObject as Exception;
-            MessageBox.Show(BuildMessage(ex), "Unhandled Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(BuildMessage(ex), "Unhandled Error",
+                MessageBoxButton.OK, MessageBoxImage.Error);
         };
 
         DispatcherUnhandledException += (s, e) =>
         {
-            MessageBox.Show(BuildMessage(e.Exception), "Runtime Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(BuildMessage(e.Exception), "Runtime Error",
+                MessageBoxButton.OK, MessageBoxImage.Error);
             e.Handled = true;
         };
     }
 
     private static string BuildMessage(Exception? ex)
     {
-        if (ex == null) return "Unknown error occurred.";
+        if (ex == null) return "Unknown error.";
         var sb = new System.Text.StringBuilder();
-        var current = ex;
+        var cur = ex;
         int depth = 0;
-        while (current != null && depth < 5)
+        while (cur != null && depth < 5)
         {
-            if (depth > 0) sb.AppendLine("\n--- Inner Exception ---");
-            sb.AppendLine(current.GetType().FullName);
-            sb.AppendLine(current.Message);
-            current = current.InnerException;
+            if (depth > 0) sb.AppendLine("\n--- Inner ---");
+            sb.AppendLine(cur.GetType().FullName);
+            sb.AppendLine(cur.Message);
+            cur = cur.InnerException;
             depth++;
         }
         return sb.ToString();

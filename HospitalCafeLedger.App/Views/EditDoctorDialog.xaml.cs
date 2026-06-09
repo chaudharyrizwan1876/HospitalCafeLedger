@@ -9,7 +9,7 @@ public partial class EditDoctorDialog : Window
     public string Department { get; private set; } = "";
     public string Phone { get; private set; } = "";
     public decimal OpeningBalance { get; private set; }
-    public bool IsActive { get; private set; }
+    public bool    DoctorIsActive    { get; private set; }
 
     public EditDoctorDialog(DoctorViewModel doctor)
     {
@@ -49,7 +49,7 @@ public partial class EditDoctorDialog : Window
         Phone = PhoneBox.Text.Trim();
         decimal.TryParse(BalanceBox.Text, out var bal);
         OpeningBalance = bal;
-        IsActive = StatusBox.SelectedIndex == 0;
+        DoctorIsActive = StatusBox.SelectedIndex == 0;
         DialogResult = true;
     }
 
