@@ -1,57 +1,222 @@
-# Cafe Management System
+# ☕ Hospital Cafe Ledger
 
-A desktop application built for hospital cafe management. It keeps track of doctor accounts, daily orders, payments, and balances — so cafe staff always know who ordered what and whether their account has enough credit.
+A professional, offline desktop application built with **.NET 10**, **WPF (XAML)**, **SQLite**, **Entity Framework Core**, and **ML.NET** for managing hospital cafe operations. It helps track doctor accounts, billing, payments, ledger history, inventory, reports, and AI-powered business insights.
 
----
-
-## Download
-
-[![Download Latest](https://img.shields.io/badge/Download-v1.0.0-blue?style=for-the-badge)](https://github.com/chaudharyrizwan1876/HospitalCafeLedger/releases/latest/download/HospitalCafeLedger.App.exe)
-
-No installation required. Just download the `.exe` file and run it. The database is created automatically on first launch.
-
-**Login credentials**
-Email: admin@cafeledger.com
-Password: Admin@cafe
+[![Download Latest Release](https://img.shields.io/badge/⬇-Download%20Latest%20Release-blue?style=for-the-badge)](https://github.com/chaudharyrizwan1876/HospitalCafeLedger/releases/latest/download/HospitalCafeLedger-v1.0.zip)
 
 ---
 
-## How It Works
+# 🔑 Demo Login Credentials
 
-Every doctor has an account in the system. When they open an account they deposit an opening balance — this is their prepaid credit. Every time they order food from the cafe, the order amount is deducted from that balance. They can add more money to their account at any time. If their balance runs out and they keep ordering, the system tracks the outstanding amount separately.
+| Role | Email | Password |
+|------|-------|----------|
+| **Admin** | admin@cafeledger.com | Admin@cafe |
 
-The staff uses the Billing screen to record orders in real time. They select the doctor, pick items from the quick menu or add a custom item, and save the order. The doctor's balance updates instantly.
-
----
-
-## Screens
-
-**AI Insights** shows four machine learning predictions: next month sales forecast, which doctors are about to run out of balance, which items are trending up or down, and what days and hours the cafe is busiest.
-
-**Dashboard** shows today's sales, total pending amount across all doctors, total active doctors, today's order count, a monthly sales line chart, top ordered items this month, recent transactions, and a pending summary — all from live database data.
-
-**Doctors / Members** is where you manage doctor accounts. You can add a new doctor with their name, department, phone number, and opening balance. You can edit any detail or delete a doctor. There is a live search bar to filter by name, ID, or department.
-
-**Items / Recipes** is the menu management screen. Add any food or drink item with its category and price. Items added here automatically appear as quick buttons in the Billing screen.
-
-**Billing / New Order** is the main screen for daily use. Select a doctor from the list, tap the quick items to add them to the order, or use the Custom Item button for anything not on the menu. The total updates as you add items. Press Save Order to record it.
-
-**Payments** is the wallet screen. Every doctor's account shows their opening balance, total cash deposits, total orders placed, and current available balance. Staff can add a new deposit here when a doctor tops up their account. If the balance is negative the system shows the outstanding amount in red.
-
-**Ledger / History** shows a complete order history for any doctor, grouped by date with a day total at the bottom of each date. Useful for checking what a specific doctor had over any period.
-
-**Reports** generates a monthly summary for all doctors in one table — opening balance, total deposited, orders that month, and available balance. The report can be exported as a CSV file and opened in Excel.
-
-**Backup / Restore** lets you save a copy of the database to any folder on your computer and restore from a previous backup if needed.
+> ⚠️ These credentials are for demonstration purposes only.
 
 ---
 
-## Tech Stack
+# 📸 Features Overview
 
-Built with C# and WPF on .NET 10. Database is SQLite managed through Entity Framework Core — the database file sits next to the application, no server or internet needed. Machine learning predictions use ML.NET. The entire application runs offline on any Windows machine.
+## 👨‍⚕️ Doctor / Member Management
+
+- Add, edit and delete doctor accounts
+- Opening balance management
+- Department & phone information
+- Live doctor search
+- Active account tracking
 
 ---
 
-## Requirements
+## 🛒 Billing & Orders
 
-Windows 10 or later. No additional software or runtime installation needed — everything is bundled in the single exe file.
+- Fast billing interface
+- Quick item buttons
+- Custom item support
+- Automatic balance deduction
+- Real-time total calculation
+- Order history recording
+
+---
+
+## 💰 Payments
+
+- Deposit money into doctor accounts
+- Automatic balance updates
+- Outstanding balance tracking
+- Complete payment history
+
+---
+
+## 📖 Ledger History
+
+- Complete order history
+- Date-wise grouping
+- Daily totals
+- Doctor-wise filtering
+
+---
+
+## 🍔 Items / Recipes
+
+- Add new menu items
+- Edit item prices
+- Category management
+- Quick billing integration
+
+---
+
+## 📊 Reports
+
+- Monthly doctor reports
+- Opening & closing balance
+- Deposit summary
+- Order summary
+- CSV export
+- Date filtering
+
+---
+
+## 💾 Backup & Restore
+
+- Database backup
+- Restore previous backups
+- Safe data recovery
+
+---
+
+## 🤖 AI Insights (ML.NET)
+
+Built using **ML.NET**
+
+| Feature | Description |
+|----------|-------------|
+| **Sales Forecasting** | Predicts next month's expected sales |
+| **Low Balance Prediction** | Identifies doctors likely to run out of balance |
+| **Trending Items Analysis** | Shows fast-growing and declining menu items |
+| **Peak Hour Analysis** | Predicts busiest days and hours for the cafe |
+
+---
+
+# 🛠 Technology Stack
+
+| Layer | Technology |
+|--------|------------|
+| **Framework** | .NET 10 |
+| **Desktop UI** | WPF (XAML) |
+| **Database** | SQLite |
+| **ORM** | Entity Framework Core 10 |
+| **Machine Learning** | ML.NET |
+| **Architecture** | Layered Architecture (Models → Data → Services → Desktop) |
+
+---
+
+# 🚀 Getting Started
+
+## Option 1 — Download Ready-to-Use Application (Recommended)
+
+Download the latest release from:
+
+👉 **https://github.com/chaudharyrizwan1876/HospitalCafeLedger/releases/latest**
+
+Steps:
+
+1. Download the latest ZIP file.
+2. Extract it.
+3. Open the extracted folder.
+4. Run:
+
+```
+HospitalCafeLedger.App.exe
+```
+
+No installation is required.
+
+---
+
+## Option 2 — Build From Source
+
+### Prerequisites
+
+- .NET 10 SDK
+- Windows 10 / Windows 11
+- Visual Studio 2022 or VS Code
+
+Clone the repository:
+
+```bash
+git clone https://github.com/chaudharyrizwan1876/HospitalCafeLedger.git
+```
+
+Navigate to the project:
+
+```bash
+cd HospitalCafeLedger
+```
+
+Restore packages:
+
+```bash
+dotnet restore
+```
+
+Run the application:
+
+```bash
+dotnet run --project HospitalCafeLedger.App/HospitalCafeLedger.App.csproj
+```
+
+---
+
+# 🗄 First Run
+
+On the first launch the application automatically:
+
+- Creates the SQLite database
+- Creates the default Admin account
+- Initializes required tables
+- Loads sample data (if available)
+
+---
+
+# 📁 Project Structure
+
+```
+HospitalCafeLedger
+│
+├── HospitalCafeLedger.App
+├── HospitalCafeLedger.Services
+├── HospitalCafeLedger.Data
+├── HospitalCafeLedger.Models
+└── HospitalCafeLedger.slnx
+```
+
+---
+
+# ✨ Highlights
+
+- Modern WPF Desktop UI
+- SQLite Database
+- Entity Framework Core
+- ML.NET Integration
+- Offline First
+- AI Sales Forecasting
+- Doctor Wallet Management
+- Inventory & Billing
+- CSV Report Export
+- Professional Layered Architecture
+
+---
+
+# 📄 License
+
+This project is available for educational and portfolio purposes.
+
+---
+
+# 👨‍💻 Author
+
+**Rizwan Chaudhary**
+
+GitHub:
+https://github.com/chaudharyrizwan1876
