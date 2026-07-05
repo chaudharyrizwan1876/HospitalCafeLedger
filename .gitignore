@@ -4,7 +4,6 @@ obj/
 
 # Visual Studio
 .vs/
-.vscode/
 
 # SQLite files
 *.db-shm
@@ -26,3 +25,5 @@ publish/
 # OS files
 .DS_Store
 Thumbs.db
+config.bat
+node_modules
